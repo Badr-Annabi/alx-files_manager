@@ -6,13 +6,15 @@ async function postNew(req, res) {
 
   const { email } = req.body;
   const { password } = req.body;
-  // console.log(email);
-  // console.log(password);
+  //   console.log(email);
+  //   console.log(password);
   if (!email) {
     res.status(400).json({ error: 'Missing email' });
+    return;
   }
   if (!password) {
     res.status(400).json({ error: 'Missing password' });
+    return;
   }
   const users = dbClient.usersCollection;
   users.findOne({ email }, (err, user) => {

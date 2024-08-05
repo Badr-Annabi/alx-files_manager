@@ -7,10 +7,10 @@ export const getConnect = async (req, res) => {
   const authHeader = req.headers.authorization;
   // console.log(authHeader);
 
-  if (!authHeader || !authHeader.startsWith('Basic ')) {
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
+  // if (!authHeader || !authHeader.startsWith('Basic ')) {
+  //   res.status(401).json({ error: 'Unauthorized' });
+  //   return;
+  // }
 
   const base64Credentials = authHeader.split(' ')[1];
   const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
@@ -25,7 +25,7 @@ export const getConnect = async (req, res) => {
     const token = uuidv4();
     const authKey = `auth_${token}`;
     await redisClient.set(authKey, user._id.toString(), 24 * 60 * 60);
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
   });
 };
 

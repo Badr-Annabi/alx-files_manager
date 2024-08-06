@@ -1,5 +1,6 @@
 import sha1 from 'sha1';
 import dbClient from '../utils/db';
+import redisClient from "redis";
 
 async function postNew(req, res) {
   // await dbClient.connect();

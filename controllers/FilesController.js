@@ -1,7 +1,7 @@
-import getUserByToken from '../utils/auth';
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 import { promises as fs } from 'fs';
+import getUserByToken from '../utils/auth';
 import dbClient from '../utils/db';
 
 const folderPath = process.env.FOLDER_PATH || '/tmp/files_manager';
@@ -49,17 +49,14 @@ class FilesController {
           isPublic,
           userId: user._id,
         },
-      ).then((folder) => {
-        res.status(201).json({
-          id: folder.insertedId,
-          userId: user._id,
-          name,
-          type,
-          isPublic,
-          parentId,
-        });
-        // console.log(1);
-      }).catch((error) => {
+      ).then((folder) => res.status(201).json({
+        id: folder.insertedId,
+        userId: user._id,
+        name,
+        type,
+        isPublic,
+        parentId,
+      })).catch((error) => {
         console.log(error);
       });
     } else {

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { v4 as uuidv4 } from 'uuid';
 import { promises as fs } from 'fs';
-import getUserByToken from '../utils/auth';
+import { getUserByToken } from '../utils/auth';
 import dbClient from '../utils/db';
 
 const folderPath = process.env.FOLDER_PATH || '/tmp/files_manager';

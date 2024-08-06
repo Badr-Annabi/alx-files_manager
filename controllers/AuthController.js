@@ -21,7 +21,7 @@ class AuthController {
 
     users.findOne({ email, password: hashedPassword }, async (err, user) => {
       if (!user) {
-        res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ error: 'Unauthorized' });
       }
       const token = uuidv4();
       const authKey = `auth_${token}`;

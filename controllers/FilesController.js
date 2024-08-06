@@ -9,18 +9,12 @@ import { getUserByToken } from '../utils/auth';
 
 const folderPath = process.env.FOLDER_PATH || '/tmp/files_manager';
 
-
 class FilesController {
   static async postUpload(req, res) {
     const user = await getUserByToken(req);
     if (!user) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
-
-    const { name, type, parentIdn = 0, isPublic = false, data } = req.body;
-  }
-
-}
 
     const { name } = req.body;
     const { type } = req.body;
@@ -91,7 +85,7 @@ class FilesController {
         isPublic,
         parentId,
         localPath: filePath,
-      }).then((file) =>  res.status(201).json({
+      }).then((file) => res.status(201).json({
         id: file.insertedId,
         userId: user._id,
         name,
@@ -101,5 +95,8 @@ class FilesController {
       })).catch((error) => {
         console.log(error);
       });
+    }
+    return null;
+  }
 }
 module.exports = FilesController;
